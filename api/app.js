@@ -22,16 +22,14 @@ app.post('/token', async function (req, res) {
 		const result = await fetch(
 			`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
 			{
-				methof: 'GET',
+				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${access_token}`,
 					Accept: 'application/json',
 				},
 			}
 		)
-		const data = await result.json()
-
-		const { email, picture, name } = data
+		const { email, picture, name } = await result.json()
 
 		const user = {
 			name,
